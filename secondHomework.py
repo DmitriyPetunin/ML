@@ -5,6 +5,7 @@ import seaborn as sns
 from sklearn.linear_model import LinearRegression
 from sklearn.decomposition import PCA
 from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import Lasso
 
 from sklearn.model_selection import train_test_split
 
@@ -80,6 +81,18 @@ def main():
 
     plt.show()
 
+    # Тренируем Lasso
+    lasso = Lasso(alpha=0.01, max_iter=5000)
+    lasso.fit(X_train, Y_train)
+
+    #Получаю имена признаков
+    feature_importance = pd.Series(lasso.coef_, index=X.columns)
+
+
+    # Взяли все признаки не равные нулю и отсортировали по убыванию
+    important_features = feature_importance[feature_importance != 0].sort_values(ascending=False)
+    print("Lasso coefficients:", lasso.coef_)
+    print("Lasso\n", important_features)
 
 
 
