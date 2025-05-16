@@ -23,6 +23,7 @@ plt.grid()
 plt.show()
 
 optimal_k = 3
+
 # Часть 2
 def k_means(dataset, k, max_iters=100, tol=1e-4):
     centroids = dataset[np.random.choice(dataset.shape[0], k, replace=False)]
